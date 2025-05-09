@@ -8,7 +8,7 @@ export const StyledCalendar = styled(Calendar)`
   margin: 0 auto; // 가운데 정렬
   border: none;
   border-radius: 16px;
-  padding: 20px;
+  padding: 10px;
   background: #fefefe;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
@@ -20,7 +20,7 @@ export const StyledCalendar = styled(Calendar)`
 
   .react-calendar__tile {
     padding: 12px 0;
-    font-size: 14px;
+    font-size: 10px;
     border-radius: 12px;
     transition: background-color 0.3s;
   }
@@ -41,9 +41,9 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   .react-calendar__navigation button {
-    font-size: 16px;
+    font-size: 13px;
     color: #333;
-    padding: 10px;
+    padding: 0px;
     background: none;
   }
 

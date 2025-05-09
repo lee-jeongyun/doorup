@@ -4,6 +4,7 @@ import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
 import { StyledCalendar } from '../components/StyledCalendar';
 import { Container } from '../components/Homecomponent';
+import { useNavigate } from 'react-router-dom';
 import {
   collection,
   onSnapshot,
@@ -23,6 +24,29 @@ interface IDiary {
   date: string;
 }
 
+const BackButton = styled.button`
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  background: none;
+  border: none;
+  color: #1d9bf0;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: #0c7cc0;
+  }
+
+  svg {
+    margin-right: 8px;
+    font-size: 22px;
+  }
+`;
+
 const DiaryList = styled.div`
   margin-top: 30px;
   display: flex;
@@ -39,6 +63,7 @@ const DiaryCard = styled.div`
 `;
 
 const CalendarPage: React.FC = () => {
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [entries, setEntries] = useState<IDiary[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -93,6 +118,8 @@ const CalendarPage: React.FC = () => {
 
   return (
     <Container>
+      <BackButton onClick={() => navigate('/Home')}>← 뒤로가기</BackButton>
+
       <StyledCalendar
         onChange={handleChange}
         value={selectedDate}

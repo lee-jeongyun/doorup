@@ -31,7 +31,7 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   body{
-    background-color:black;
+    background-color: #fef6e4;
     color:white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   min-height: 100vh; // 💡 최소 높이만 지정 (자동으로 늘어남)
   display: flex;
   justify-content: center;
-  padding: 40px 0; // 💡 위아래 여백 추가
+  padding: 0px 0; // 💡 위아래 여백 추가
   overflow-y: auto; // 💡 필요 시 스크롤 허용
 `;
 

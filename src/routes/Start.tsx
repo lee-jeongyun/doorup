@@ -48,7 +48,7 @@ export default function Start() {
   };
   return (
     <Wrapper>
-      <Title>안녕하세요</Title>
+      <Title>기억상자</Title>
       <Form onSubmit={onSubmit}>
         <Input
           onChange={onChange}

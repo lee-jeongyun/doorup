@@ -10,17 +10,17 @@ const Wrapper = styled.div`
   align-items: start;
   padding: 80px 20px;
   min-height: 100vh;
-  background-color: #121212;
 `;
 
 const Card = styled.div`
-  background-color: #1e1e1e;
+  background-color: white;
   padding: 48px;
   border-radius: 20px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-  color: white;
+  color: black;
   width: 100%;
   max-width: 500px;
+  margin-top: 60px;
 `;
 
 const Title = styled.h2`
@@ -59,6 +59,29 @@ const LogoutButton = styled.button`
   }
 `;
 
+const BackButton = styled.button`
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  background: none;
+  border: none;
+  color: #1d9bf0;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: #0c7cc0;
+  }
+
+  svg {
+    margin-right: 8px;
+    font-size: 22px;
+  }
+`;
+
 interface FamilyData {
   fname?: string;
   mname?: string;
@@ -90,16 +113,14 @@ export default function Profile() {
 
   return (
     <Wrapper>
+      <BackButton onClick={() => navigate('/Home')}>← 뒤로가기</BackButton>
       <Card>
         <Title>👤 내 정보</Title>
         <Info>
-          <Label>닉네임:</Label>
+          <Label>이름:</Label>
           {user?.displayName ?? '익명'}
         </Info>
-        <Info>
-          <Label>이메일:</Label>
-          {user?.email}
-        </Info>
+
         <Info>
           <Label>부:</Label>
           {family.fname ?? '없음'}

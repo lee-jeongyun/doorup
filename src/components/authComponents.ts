@@ -1,39 +1,61 @@
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 100%;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #fef6e4; /* 부드러운 크림톤 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 420px;
-  padding: 50px 0px;
+  justify-content: center;
+  padding: 40px 16px;
+  box-sizing: border-box;
 `;
 
 export const Title = styled.h1`
-  font-size: 42px;
+  font-size: 38px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
 `;
 
 export const Form = styled.form`
-  margin-top: 50px;
-  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 18px;
   width: 100%;
+  max-width: 400px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 `;
 
 export const Input = styled.input`
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: none;
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  font-size: 18px;
   width: 100%;
-  font-size: 16px;
+  background-color: #fff;
+
+  &:focus {
+    border-color: #a00;
+    outline: none;
+  }
+
   &[type='submit'] {
-    cursor: pointer;
+    background-color: #a00;
     color: white;
-    background-color: rgb(157, 0, 0);
+    font-weight: bold;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
     &:hover {
-      opacity: 0.8;
+      background-color: #800;
     }
   }
 `;
@@ -41,11 +63,21 @@ export const Input = styled.input`
 export const Error = styled.span`
   font-weight: 600;
   color: tomato;
+  font-size: 16px;
 `;
 
-export const Switcher = styled.span`
-  margin-top: 20px;
+export const Switcher = styled.div`
+  text-align: center;
+  margin-top: 24px;
+  font-size: 18px;
+
   a {
-    color: rgb(86, 179, 241);
+    color: #1d9bf0;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;

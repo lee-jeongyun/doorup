@@ -20,18 +20,22 @@ export interface IDiary {
 }
 
 const Wrapper = styled.div`
-  margin-top: 48px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 48px auto 0 auto; /* 위는 margin-top, 좌우는 가운데 정렬 */
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0 16px;
+  padding: 0 0px; /* 좌우 여백 */
+  height: 100px;
+  box-sizing: border-box;
 `;
 
 const DiaryCard = styled.div`
   background-color: #ffffff;
   border: 2px solid #dddddd;
   border-radius: 16px;
-  padding: 24px;
+  padding: 15px;
   font-size: 18px;
   line-height: 1.8;
   color: #111111;
@@ -51,7 +55,7 @@ const DeleteButton = styled.button`
   font-weight: 600;
   border: none;
   font-size: 12px;
-  padding: 6px 12px;
+  padding: 1px 12px;
   border-radius: 6px;
   cursor: pointer;
   position: absolute;
