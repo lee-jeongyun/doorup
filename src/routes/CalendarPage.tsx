@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Calendar from 'react-calendar';
 import type { CalendarProps } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
