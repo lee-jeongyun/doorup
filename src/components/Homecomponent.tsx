@@ -46,15 +46,17 @@ export const ButtonRow = styled.div`
 
 export const Button = styled.button`
   flex: 1;
-  padding: 10px;
-  font-size: 15px;
-  border: none;
-  border-radius: 6px;
-  background-color: #eee;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #aaa;
+  border-radius: 8px;
+  background-color: #f0f0f0;
   cursor: pointer;
 
   &:hover {
-    background-color: #ddd;
+    background-color: #e0e0e0;
+    border-color: #888;
   }
 `;
 

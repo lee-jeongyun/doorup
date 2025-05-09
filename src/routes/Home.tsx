@@ -94,11 +94,11 @@ const Home = () => {
         ) : (
           <Button disabled>음성 인식 미지원</Button>
         )}
-        <Button>사진 추가</Button>
         <Button onClick={onSubmit}>저장하기</Button>
       </ButtonRow>
       <RightButtons>
-        <Button>달력 보기</Button>
+        <Button onClick={() => navigate('/calendar')}>달력 보기</Button>
+
         <Button onClick={() => navigate('/profile')}>내 정보</Button>
       </RightButtons>
       <Contents>

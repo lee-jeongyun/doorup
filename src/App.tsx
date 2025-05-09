@@ -7,6 +7,7 @@ import { auth } from './firebase';
 import Start from './routes/Start';
 import CreateAccount from './routes/CreateAccount';
 import Profile from './routes/Profile';
+import CalendarPage from './routes/CalendarPage';
 //import { AuthProvider, useAuth } from './components/AuthContext';
 
 // const router = createBrowserRouter([
@@ -38,9 +39,11 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  height: 100vh;
+  min-height: 100vh; // 💡 최소 높이만 지정 (자동으로 늘어남)
   display: flex;
   justify-content: center;
+  padding: 40px 0; // 💡 위아래 여백 추가
+  overflow-y: auto; // 💡 필요 시 스크롤 허용
 `;
 
 function App() {
@@ -63,6 +66,10 @@ function App() {
     {
       path: '/profile',
       element: <Profile />,
+    },
+    {
+      path: '/calendar',
+      element: <CalendarPage />,
     },
   ]);
 

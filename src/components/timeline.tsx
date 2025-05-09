@@ -4,39 +4,77 @@ import {
   orderBy,
   query,
   limit,
+  deleteDoc,
+  doc,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 
 export interface IDiary {
   id: string;
   diaryText: string;
   userId: string;
   createdAt: number;
-  date: string; // Date 타입이 아니고 string 또는 Timestamp일 수 있음
+  date: string;
 }
 
 const Wrapper = styled.div`
-  padding: 20px;
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 16px;
 `;
 
 const DiaryCard = styled.div`
-  border: 1px solid gray;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 8px;
+  background-color: #ffffff;
+  border: 2px solid #dddddd;
+  border-radius: 16px;
+  padding: 24px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #111111;
+  position: relative;
+`;
+
+const DiaryDate = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+`;
+
+const DeleteButton = styled.button`
+  background-color: tomato;
+  color: white;
+  font-weight: 600;
+  border: none;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  &:hover {
+    background-color: darkred;
+  }
 `;
 
 export default function Timeline() {
   const [entries, setEntries] = useState<IDiary[]>([]);
+  const user = auth.currentUser;
 
   useEffect(() => {
     const q = query(
-      collection(db, 'content'), // ← 저장할 때 사용한 컬렉션 이름과 일치시켜야 함
+      collection(db, 'content'),
+      //where('userId', '==', user?.uid),
       orderBy('createdAt', 'desc'),
-      limit(4)
+      limit(25)
     );
+    //console.log(user?.uid, 'userId');
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const diaryList = snapshot.docs.map((doc) => {
@@ -55,18 +93,32 @@ export default function Timeline() {
     return () => unsubscribe();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    const ok = confirm('정말 삭제하시겠습니까?');
+    if (!ok) return;
+
+    try {
+      await deleteDoc(doc(db, 'content', id));
+    } catch (e) {
+      console.error('삭제 실패:', e);
+    }
+  };
+
   return (
     <Wrapper>
-      {entries.map((entry) => (
-        <DiaryCard key={entry.id}>
-          <div>
-            <strong>날짜:</strong> {entry.date}
-          </div>
-          <div>
-            <strong>내용:</strong> {entry.diaryText}
-          </div>
-        </DiaryCard>
-      ))}
+      {entries.map((entry) =>
+        user?.uid === entry.userId ? (
+          <DiaryCard key={entry.id}>
+            <DiaryDate>{entry.date}</DiaryDate>
+            {user?.uid === entry.userId ? <div>{entry.diaryText}</div> : null}
+            {user?.uid === entry.userId && (
+              <DeleteButton onClick={() => handleDelete(entry.id)}>
+                삭제
+              </DeleteButton>
+            )}
+          </DiaryCard>
+        ) : null
+      )}
     </Wrapper>
   );
 }
