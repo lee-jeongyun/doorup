@@ -6,6 +6,7 @@ import Home from './routes/Home';
 import { auth } from './firebase';
 import Start from './routes/Start';
 import CreateAccount from './routes/CreateAccount';
+import Profile from './routes/Profile';
 //import { AuthProvider, useAuth } from './components/AuthContext';
 
 // const router = createBrowserRouter([
@@ -58,6 +59,10 @@ function App() {
     {
       path: '/create-account',
       element: <CreateAccount />,
+    },
+    {
+      path: '/profile',
+      element: <Profile />,
     },
   ]);
 

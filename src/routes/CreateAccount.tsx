@@ -1,5 +1,4 @@
-//import { styled } from 'styled-components';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import {
@@ -11,6 +10,7 @@ import {
 } from '../components/authComponents';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
 
 export default function CreateAccount() {
   const navigate = useNavigate();
@@ -18,25 +18,26 @@ export default function CreateAccount() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  //const [error, setError] = useState('');
+  const [Fname, setFname] = useState('');
+  const [Mname, setMname] = useState('');
+  const [Kname, setKname] = useState('');
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = e;
-    if (name === 'name') {
-      setName(value);
-    } else if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
-    }
+    if (name === 'name') setName(value);
+    else if (name === 'email') setEmail(value);
+    else if (name === 'password') setPassword(value);
+    else if (name === 'Fname') setFname(value);
+    else if (name === 'Mname') setMname(value);
+    else if (name === 'Kname') setKname(value);
   };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //setError('');
-    if (isLoading || email === '' || password === '') {
-      return;
-    }
+    if (isLoading || email === '' || password === '') return;
+
     try {
       setLoading(true);
       const credentials = await createUserWithEmailAndPassword(
@@ -44,46 +45,74 @@ export default function CreateAccount() {
         email,
         password
       );
+
       await updateProfile(credentials.user, {
         displayName: name,
       });
+
+      await setDoc(doc(db, 'family', credentials.user.uid), {
+        fname: Fname,
+        mname: Mname,
+        kname: Kname.split(',').map((k) => k.trim()),
+      });
+
       navigate('/Home');
     } catch (e) {
       if (e instanceof FirebaseError) {
-        //setError(e.message);
+        console.error(e.message);
       }
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <Wrapper>
       <Title>환영합니다</Title>
       <Form onSubmit={onSubmit}>
         <Input
-          onChange={onChange}
           name="name"
           value={name}
+          onChange={onChange}
           placeholder="이름"
-          type="text"
           required
         />
         <Input
-          onChange={onChange}
           name="email"
           value={email}
-          type="email"
-          required
-          placeholder="이메일"
-        ></Input>
-        <Input
           onChange={onChange}
+          type="email"
+          placeholder="이메일"
+          required
+        />
+        <Input
           name="password"
           value={password}
+          onChange={onChange}
           type="password"
-          required
           placeholder="비밀번호"
-        ></Input>
+          required
+        />
+        <Input
+          name="Fname"
+          value={Fname}
+          onChange={onChange}
+          placeholder="부"
+          required
+        />
+        <Input
+          name="Mname"
+          value={Mname}
+          onChange={onChange}
+          placeholder="모"
+          required
+        />
+        <Input
+          name="Kname"
+          value={Kname}
+          onChange={onChange}
+          placeholder="자녀 (쉼표로 구분)"
+        />
         <Input type="submit" value="회원가입" />
         <Switcher>
           <Link to="/">로그인</Link>

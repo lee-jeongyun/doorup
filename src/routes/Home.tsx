@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { auth, db } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Container,
   Greeting,
@@ -32,6 +34,7 @@ const getKoreanDate = (): string => {
 };
 
 const Home = () => {
+  const navigate = useNavigate();
   //const { user } = useAuth();
   const user = auth.currentUser;
   const [diaryText, setDiaryText] = useState<string>('');
@@ -96,7 +99,7 @@ const Home = () => {
       </ButtonRow>
       <RightButtons>
         <Button>달력 보기</Button>
-        <Button>설정 / 정보</Button>
+        <Button onClick={() => navigate('/profile')}>내 정보</Button>
       </RightButtons>
       <Contents>
         <Timeline />
