@@ -12,7 +12,7 @@ import {
   Contents,
 } from '../components/Homecomponent';
 import useSpeechRecognition from '../hooks/useSpeechRecognitionHooks';
-import { useAuth } from '../components/AuthContext';
+//import { useAuth } from '../components/AuthContext';
 import { addDoc, collection } from 'firebase/firestore';
 import Timeline from '../components/timeline';
 

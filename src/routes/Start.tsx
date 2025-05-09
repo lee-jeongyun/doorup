@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+//import { styled } from 'styled-components';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
@@ -17,7 +17,7 @@ export default function Start() {
   const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  //const [error, setError] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
@@ -30,7 +30,7 @@ export default function Start() {
   };
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
+    //setError('');
     if (isLoading || email === '' || password === '') {
       return;
     }
@@ -40,7 +40,7 @@ export default function Start() {
       navigate('/Home');
     } catch (e) {
       if (e instanceof FirebaseError) {
-        setError(e.message);
+        //setError(e.message);
       }
     } finally {
       setLoading(false);

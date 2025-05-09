@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { styled, createGlobalStyle } from 'styled-components';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reset from 'styled-reset';
@@ -6,22 +6,22 @@ import Home from './routes/Home';
 import { auth } from './firebase';
 import Start from './routes/Start';
 import CreateAccount from './routes/CreateAccount';
-import { AuthProvider, useAuth } from './components/AuthContext';
+//import { AuthProvider, useAuth } from './components/AuthContext';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Start />,
-  },
-  {
-    path: '/Home',
-    element: <Home />,
-  },
-  {
-    path: '/create-account',
-    element: <CreateAccount />,
-  },
-]);
+// const router = createBrowserRouter([
+//   {
+//     path: '/',
+//     element: <Start />,
+//   },
+//   {
+//     path: '/Home',
+//     element: <Home />,
+//   },
+//   {
+//     path: '/create-account',
+//     element: <CreateAccount />,
+//   },
+// ]);
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 
 function App() {
   const [isLoading, setLoading] = useState(true);
-  const { user } = useAuth(); // ✅ 이제 컴포넌트 안에서 사용됨
+  //const { user } = useAuth(); // ✅ 이제 컴포넌트 안에서 사용됨
 
   const router = createBrowserRouter([
     {
